@@ -1,6 +1,8 @@
 require 'minitest/autorun'
 require_relative 'patient'
 require_relative 'medicine'
+require_relative 'prescription'
+require 'date'
 
 class PatientTest < Minitest::Test
   def test_clash_with_empty_list
@@ -13,11 +15,18 @@ class PatientTest < Minitest::Test
     assert_equal [], patient.clash(['oxy'])
   end
 
-  def test_single_medicine_taken
-    medicine = Medicine.new('oxy')
+  def test_single_medicine_no_prescription
+    medicine = Medicine.new('oxy', [])
     patient = Patient.new([medicine])
 
     assert_equal [], patient.clash(['oxy'])
+  end
+
+  def test_single_medicine_with_prescription
+    medicine = Medicine.new('oxy', [Prescription.new])
+    patient = Patient.new([medicine])
+
+    assert_equal [Date.today], patient.clash(['oxy'])
   end
   # single medicine being taken clashing
   # medicine started being taken before date but supply has not run out
