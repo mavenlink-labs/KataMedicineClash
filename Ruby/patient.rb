@@ -7,6 +7,6 @@ class Patient
   end
 
   def clash(medicine_names, days_back=90)
-    # TODO: write this code!
+    medicine_names
   end
 end
