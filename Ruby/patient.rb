@@ -10,7 +10,6 @@ class Patient
     if(@medicines.any? { |medicine| medicine.prescriptions != [] })
       return [Date.today]
     end
-
     []
   end
 end
