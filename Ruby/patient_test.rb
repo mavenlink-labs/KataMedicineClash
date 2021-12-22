@@ -36,7 +36,7 @@ class PatientTest < Minitest::Test
     medicine = Medicine.new('oxy', [Prescription.new(dispense_date: three_days_ago)])
     patient = Patient.new([medicine])
 
-    assert_equal [Date.today, one_days_ago, two_days_ago, three_days_ago], patient.clash(['oxy'])
+    assert_equal [three_days_ago, two_days_ago, one_days_ago, Date.today], patient.clash(['oxy'])
   end
   # single medicine being taken clashing
   # medicine started being taken before date but supply has not run out
