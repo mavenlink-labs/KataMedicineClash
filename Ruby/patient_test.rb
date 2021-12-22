@@ -39,7 +39,7 @@ class PatientTest < Minitest::Test
     assert_equal [three_days_ago, two_days_ago, one_days_ago, Date.today], patient.clash(['oxy'])
   end
 
-  def test_medicine_names
+  def test_medicine_names_not_conflicting
     fake = Medicine.new('fake', [Prescription.new()])
     patient = Patient.new([fake])
 
