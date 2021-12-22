@@ -7,8 +7,9 @@ class Patient
   end
 
   def clash(medicine_names, days_back=90)
-    if(@medicines.any? { |medicine| medicine.prescriptions != [] })
-      return [Date.today]
+    prescription = @medicines.detect { |medicine| medicine.prescriptions != [] }
+    if(prescriptions.present?)
+      return prescriptions.dispense_date [Date.today]
     end
     []
   end
