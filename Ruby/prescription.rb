@@ -8,4 +8,8 @@ class Prescription
     @days_supply = options[:days_supply] ||= 30
   end
 
+  def end_date
+    @dispense_date + @days_supply - 1
+  end
+
 end
