@@ -82,4 +82,8 @@ class PatientTest < Minitest::Test
     patient = Patient.new([oxy])
     assert_equal [four_days_ago, three_days_ago], patient.clash(['oxy'])
   end
+
+  # test with multiple medicine_names
+  # test with multiple medicines
+  # Should dates be ordered from oldest to newest?
 end
