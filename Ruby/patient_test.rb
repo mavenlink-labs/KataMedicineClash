@@ -84,6 +84,21 @@ class PatientTest < Minitest::Test
   end
 
   # test with multiple medicine_names
+
+  def test_multiple_medicine_names
+    three_days_ago = Date.today - 3
+    four_days_ago = Date.today - 4
+    two_days_ago = Date.today - 2
+    oxy = Medicine.new("oxy",
+                       [Prescription.new(dispense_date: four_days_ago, days_supply: 2)])
+    percocet = Medicine.new("percocet",
+                       [Prescription.new(dispense_date: three_days_ago, days_supply: 2)])
+
+
+    patient = Patient.new([oxy, percocet])
+    assert_equal [four_days_ago, three_days_ago, two_days_ago], patient.clash(["oxy", "percocet"])
+  end
+
   # test with multiple medicines
   # Should dates be ordered from oldest to newest?
 end
