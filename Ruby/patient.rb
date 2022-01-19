@@ -14,6 +14,6 @@ class Patient
       start_date = [prescription.dispense_date, Date.today - days_back].max
       end_date = [prescription.end_date, Date.today].min
       (start_date..end_date).entries
-    end.uniq
+    end.uniq.sort.reverse
   end
 end

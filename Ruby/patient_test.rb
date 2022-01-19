@@ -36,7 +36,7 @@ class PatientTest < Minitest::Test
     medicine = Medicine.new('oxy', [Prescription.new(dispense_date: three_days_ago)])
     patient = Patient.new([medicine])
 
-    assert_equal [three_days_ago, two_days_ago, one_days_ago, Date.today], patient.clash(['oxy'])
+    assert_equal [Date.today, one_days_ago, two_days_ago, three_days_ago], patient.clash(['oxy'])
   end
 
   def test_medicine_names_not_conflicting
@@ -70,7 +70,7 @@ class PatientTest < Minitest::Test
           [Prescription.new(dispense_date: five_days_ago, days_supply: 1), Prescription.new(dispense_date: three_days_ago, days_supply: 1)])
 
     patient = Patient.new([oxy])
-    assert_equal [five_days_ago, three_days_ago], patient.clash(['oxy'])
+    assert_equal [three_days_ago, five_days_ago], patient.clash(['oxy'])
   end
 
   def test_multiple_prescriptions_same_day
@@ -80,7 +80,7 @@ class PatientTest < Minitest::Test
                        [Prescription.new(dispense_date: four_days_ago, days_supply: 2), Prescription.new(dispense_date: three_days_ago, days_supply: 1)])
 
     patient = Patient.new([oxy])
-    assert_equal [four_days_ago, three_days_ago], patient.clash(['oxy'])
+    assert_equal [three_days_ago, four_days_ago], patient.clash(['oxy'])
   end
 
   # test with multiple medicine_names
@@ -96,7 +96,7 @@ class PatientTest < Minitest::Test
 
 
     patient = Patient.new([oxy, percocet])
-    assert_equal [four_days_ago, three_days_ago, two_days_ago], patient.clash(["oxy", "percocet"])
+    assert_equal [two_days_ago, three_days_ago, four_days_ago], patient.clash(["oxy", "percocet"])
   end
 
 
