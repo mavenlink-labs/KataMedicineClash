@@ -12,4 +12,9 @@ class Prescription
     @dispense_date + @days_supply - 1
   end
 
+  def dates_taken_in_range(begin_date)
+    start_date = [@dispense_date, begin_date].max
+    end_date = [self.end_date, Date.today].min
+    (start_date..end_date).entries
+  end
 end
